@@ -8,7 +8,7 @@ const Profile = ({match}) => {
     const [redirectToSignIn, setRedirect] = useState(false)
     const [user, setUser] = useState({})
     const history = useHistory()
-
+    const [clicks, setClicks] = useState()
     
     useEffect(() => {
         const abortController  = new AbortController()
@@ -33,7 +33,7 @@ const Profile = ({match}) => {
         update({userId: match.params.userId},
             {t: auth.isAuthenticated().token},
             {clickCount: clicks})
-
+        setClicks(clicks)
     }, [match.params.userId, user])
 
 
@@ -47,7 +47,7 @@ const Profile = ({match}) => {
                     <Card.Body>
                         <h2 className="text-center mb-4">Username: {user.username}</h2>
                         <Card.Img src={cow}/>
-                        <h4 className="mt-3 text-center">Click Count: {user.clickCount}</h4>
+                        <h4 className="mt-3 text-center">Click Count: {clicks}</h4>
                         <Button onClick={() => history.push('/')} className="btn btn-primary w-100">Back</Button>
                     </Card.Body>
                 
